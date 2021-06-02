@@ -1,25 +1,40 @@
+import {Helmet} from "react-helmet";
 import logo from './logo.svg';
 import './App.css';
 
+import jsonId from "./jsonId.json";
+import { data } from "./dummy"
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(jsonId)}
+        </script>
+      </Helmet>
+
+      <div className="columRow">
+          <div className="container flex">
+            {
+              data.map((data) => (
+                <>
+                    <div className="ImagesCover">
+                        <img src={data.image} alt="Italian Trulli" />
+                    </div><div className="textDescription">
+                        <p className="brandName"> { data.brand } </p>
+                        <h3 className="titleName"> { data.name } </h3>
+                        <p className="deskripsi">
+                          { data.description }
+                        </p>
+                    </div>
+                </>
+              ))
+            }
+          </div>
+      </div>
+  </>
+  );  
 }
 
 export default App;
